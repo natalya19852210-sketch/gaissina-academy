@@ -1,7 +1,7 @@
 /* GAISSINA Audit — данные чек-листа и магазинов */
 
 window.AUDIT_PASSWORD = "gaissina-audit-2026"; // ← измените этот пароль и сообщите контролёрам
-window.AUDIT_ENDPOINT = "PASTE_APPS_SCRIPT_URL_HERE"; // ← заменить на URL после развёртывания Apps Script
+window.AUDIT_ENDPOINT = "https://script.google.com/macros/s/AKfycbw20VLOvuZmpKsQZI0Q-_CAxG8Lb-Z5g4Adl5ij7BEv6lBKtYdMHJq5IeehA_QfcB8/exec";
 
 window.AUDIT_STORES = [
   "Алматы — MEGA Alma-Ata",

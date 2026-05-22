@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Аудит магазина · GAISSINA Retail Academy</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="audit.css">
+</head>
+<body class="audit" data-page="entry">
+<div class="progress"><span></span></div>
+
+<header class="audit-top">
+  <a href="../index.html" class="at-brand">
+    GAISSINA
+    <div class="at-sub">Retail Academy · Аудит</div>
+  </a>
+  <a href="../index.html" class="at-back">← На главную</a>
+</header>
+
+<main class="audit-wrap">
+
+  <h1 class="audit-h1">Аудит магазина</h1>
+  <p class="audit-lead">
+    Чек-лист контроля стандартов GAISSINA. 77 пунктов, 10 разделов.
+    Все результаты сохраняются для рейтинга магазинов и анализа динамики.
+  </p>
+
+  <!-- ============ ВХОД ПО ПАРОЛЮ ============ -->
+  <div class="audit-card" id="pwd-gate">
+    <h2>Вход для контролёров</h2>
+    <p class="desc">Раздел закрыт паролем — он у вашего руководителя.</p>
+    <div class="field">
+      <label for="pwd-input">Пароль</label>
+      <input type="password" id="pwd-input" autocomplete="off" autofocus>
+    </div>
+    <button class="btn" id="pwd-btn">Войти</button>
+    <div class="err-msg" id="pwd-err" style="margin-top:14px;display:block;background:transparent;border:none;padding:0"></div>
+  </div>
+
+  <!-- ============ СТАРТОВАЯ ФОРМА ============ -->
+  <div class="audit-card" id="start-form" style="display:none">
+    <h2>Параметры визита</h2>
+    <p class="desc">Заполните перед началом обхода — эта информация попадёт в Таблицу.</p>
+
+    <div class="field">
+      <label for="store">Магазин</label>
+      <select id="store">
+        <option value="">— выберите магазин —</option>
+      </select>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="auditor">Аудитор (ваше имя)</label>
+        <input type="text" id="auditor" placeholder="Например: Наталья Куприянова">
+      </div>
+      <div class="field">
+        <label for="director">Директор магазина</label>
+        <input type="text" id="director" placeholder="Имя и фамилия">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Дата</label>
+      <div style="font-size:15px;color:var(--graphite);padding:6px 0" id="date-show">—</div>
+    </div>
+
+    <div class="err-msg" id="start-err" style="display:block;background:transparent;border:none;padding:0;margin-bottom:14px"></div>
+    <button class="btn" id="go-btn">Начать аудит →</button>
+  </div>
+
+  <div class="audit-card" style="background:var(--milk)">
+    <h2 style="font-size:18px">Как пользоваться</h2>
+    <p class="desc">
+      По каждому пункту выбираете <b>✓ выполняется</b>, <b>✕ не выполняется</b> или
+      <b>— не применимо</b> (если пункт в этом визите не оценивался).
+      Внизу страницы — итог в реальном времени. По завершении нажимаете «Сохранить аудит»,
+      и результат уходит в Таблицу руководителя.
+    </p>
+  </div>
+
+</main>
+
+<script src="data.js"></script>
+<script src="audit.js"></script>
+</body>
+</html>

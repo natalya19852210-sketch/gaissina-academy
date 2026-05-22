@@ -45,6 +45,10 @@
       '<nav class="sb-scroll">' +
         '<div class="sb-cap">Девять книг</div>' +
         links +
+        '<div class="sb-cap" style="margin-top:18px">Контроль</div>' +
+        '<a class="sb-link" href="' + root + 'audit/index.html">' +
+          '<span class="n">✓</span><span>Аудит магазина</span>' +
+        '</a>' +
       "</nav>" +
       '<div class="sb-foot">Внутренний документ GAISSINA.<br>Не для передачи третьим лицам.</div>';
   }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Чек-лист аудита · GAISSINA Retail Academy</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="audit.css">
+</head>
+<body class="audit" data-page="checklist">
+<div class="progress"><span></span></div>
+
+<header class="audit-top">
+  <a href="../index.html" class="at-brand">
+    GAISSINA
+    <div class="at-sub">Retail Academy · Аудит</div>
+  </a>
+  <a href="index.html" class="at-back">← Прервать</a>
+</header>
+
+<div class="visit-head">
+  <div class="vh-grid">
+    <div class="vh-cell">
+      <div class="vh-lbl">Магазин</div>
+      <div class="vh-val" id="vh-store">—</div>
+    </div>
+    <div class="vh-cell">
+      <div class="vh-lbl">Аудитор</div>
+      <div class="vh-val" id="vh-auditor">—</div>
+    </div>
+    <div class="vh-cell">
+      <div class="vh-lbl">Директор</div>
+      <div class="vh-val" id="vh-director">—</div>
+    </div>
+    <div class="vh-cell">
+      <div class="vh-lbl">Дата</div>
+      <div class="vh-val" id="vh-date">—</div>
+    </div>
+  </div>
+</div>
+
+<main class="audit-wrap" id="audit-content">
+  <div id="sections"></div>
+</main>
+
+<div class="audit-bar">
+  <div class="audit-bar-in">
+    <div class="stat">
+      <div class="v" id="bar-pct">—</div>
+      <div class="l">Итог</div>
+    </div>
+    <div class="counts">
+      <span>✓ <b id="bar-yes">0</b></span>
+      <span>✕ <b id="bar-no">0</b></span>
+      <span>— <b id="bar-na">0</b></span>
+      <span><b id="bar-of">0 / 77</b></span>
+    </div>
+    <button class="btn" id="submit-btn" disabled>Отметьте все пункты</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="audit.js"></script>
+</body>
+</html>

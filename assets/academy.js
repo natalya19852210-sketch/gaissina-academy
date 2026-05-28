@@ -16,8 +16,9 @@
 
   // путь к корню относительно текущей страницы
   var inBooks = /\/books\//.test(location.pathname) || /books[\\/]/.test(location.href);
-  var root = inBooks ? "../" : "";
-  var booksDir = inBooks ? "" : "books/";
+  var inAux = /\/(audit|checklist)\//.test(location.pathname);
+  var root = (inBooks || inAux) ? "../" : "";
+  var booksDir = inBooks ? "" : (inAux ? "../books/" : "books/");
 
   var current = document.body.getAttribute("data-book") || "";
 
@@ -46,6 +47,9 @@
         '<div class="sb-cap">Девять книг</div>' +
         links +
         '<div class="sb-cap" style="margin-top:18px">Контроль</div>' +
+        '<a class="sb-link" href="' + root + 'checklist/index.html">' +
+          '<span class="n">☰</span><span>Чек-лист аудита</span>' +
+        '</a>' +
         '<a class="sb-link" href="' + root + 'audit/index.html">' +
           '<span class="n">✓</span><span>Аудит магазина</span>' +
         '</a>' +

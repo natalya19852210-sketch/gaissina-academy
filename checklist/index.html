@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Чек-лист аудита магазина · GAISSINA Retail Academy</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body data-book="">
+<div class="progress"><span></span></div>
+<button class="menu-btn" aria-label="Меню"><span></span></button>
+<div class="scrim"></div>
+<aside class="sidebar" id="sidebar"></aside>
+
+<main class="content">
+<div class="wrap">
+
+  <header class="book-head">
+    <div class="book-kicker">Контроль</div>
+    <h1 class="book-title">Чек-лист аудита магазина</h1>
+    <p class="book-lead">
+      По этим 77 пунктам проводится контроль стандартов GAISSINA в каждом
+      магазине. Никаких неожиданностей — все требования собраны здесь.
+      Изучайте, отрабатывайте на пятиминутках и следите, чтобы магазин всегда
+      соответствовал.
+    </p>
+    <div class="book-meta">
+      <span class="pill">77 пунктов</span>
+      <span class="pill">10 разделов</span>
+      <span class="pill">Для всех сотрудников</span>
+    </div>
+  </header>
+
+  <div class="callout rule">
+    <div class="co-h">Как контролёр оценивает каждый пункт</div>
+    <p>
+      По каждому из 77 пунктов ставится один из трёх статусов:
+      <strong>✓ выполняется</strong>, <strong>✕ не выполняется</strong> или
+      <strong>— не применимо</strong>. Итоговый процент магазина = выполнено ÷
+      (выполнено + не выполнено) × 100%. Пункты «не применимо» в расчёт не
+      идут. На нарушения контролёр прикладывает фото — как доказательство.
+    </p>
+  </div>
+
+  <div id="checklist-sections"></div>
+
+  <div class="callout">
+    <div class="co-h">Готовьте магазин не к визиту, а постоянно</div>
+    <p>
+      Этот список — не «к проверке», а ежедневный стандарт работы.
+      Если магазин держит все 77 пунктов каждый день, никакой аудит не
+      становится неожиданностью. Подробности по каждому стандарту — в книгах
+      академии (особенно <strong>Мерчандайзинг</strong>, <strong>Операции</strong>
+      и <strong>Книга директора</strong>).
+    </p>
+  </div>
+
+  <nav class="book-nav">
+    <a class="prev" href="../index.html">
+      <div class="bn-dir">← Назад</div>
+      <div class="bn-t">На главную академии</div>
+    </a>
+    <a class="next" href="../audit/index.html">
+      <div class="bn-dir">Для контролёров →</div>
+      <div class="bn-t">Раздел аудита (по паролю)</div>
+    </a>
+  </nav>
+
+</div>
+</main>
+
+<script src="../audit/data.js"></script>
+<script src="../assets/academy.js"></script>
+<script>
+(function(){
+  var container = document.getElementById('checklist-sections');
+  if (!container || !window.AUDIT_DATA) return;
+
+  var sectionWords = ['первый','второй','третий','четвёртый','пятый','шестой','седьмой','восьмой','девятый','десятый'];
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  var globalNum = 0;
+  var html = '';
+  window.AUDIT_DATA.forEach(function(sec, si){
+    var sNum = String(si+1).padStart(2,'0');
+    html += '<section class="module">' +
+      '<div class="module-tag"><span class="num">' + sNum + '</span><span class="lbl">Раздел ' + (sectionWords[si]||(si+1)) + '</span></div>' +
+      '<h2 class="module-title">' + escapeHtml(sec.section) + '</h2>' +
+      '<div class="checklist"><div class="ttl">' + sec.items.length + ' пунктов</div><ul>';
+    sec.items.forEach(function(text){
+      globalNum++;
+      html += '<li><strong style="color:var(--taupe-d);font-weight:700;margin-right:6px">' + globalNum + '.</strong>' + escapeHtml(text) + '</li>';
+    });
+    html += '</ul></div></section>';
+  });
+  container.innerHTML = html;
+})();
+</script>
+</body>
+</html>

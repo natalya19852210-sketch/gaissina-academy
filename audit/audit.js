@@ -9,8 +9,8 @@
   // лежат в памяти на время сессии аудита).
   var photosByItem = {};
   var MAX_PHOTOS = 3;
-  var MAX_PHOTO_DIM = 1280; // макс. сторона
-  var JPEG_QUALITY = 0.8;
+  var MAX_PHOTO_DIM = 1024; // макс. сторона
+  var JPEG_QUALITY = 0.7;
 
   function $(s, root){ return (root||document).querySelector(s); }
   function $$(s, root){ return Array.prototype.slice.call((root||document).querySelectorAll(s)); }
@@ -317,11 +317,12 @@
   }
 
   // ============ ОТПРАВКА ============
-  function submitAudit(){
+  function submitAudit(retryCount){
+    retryCount = retryCount || 0;
     var visit = JSON.parse(SS.getItem('audit_visit'));
     var btn = $('#submit-btn');
     btn.disabled = true;
-    btn.textContent = 'Отправка…';
+    btn.textContent = retryCount > 0 ? ('Повтор ' + retryCount + '/2…') : 'Отправка…';
 
     // проверим, не остались ли необработанные фото
     var stillLoading = false;
@@ -378,18 +379,33 @@
       return;
     }
 
-    btn.textContent = 'Отправка…';
+    var body = JSON.stringify(payload);
+    var sizeMB = (body.length / 1024 / 1024).toFixed(1);
+    console.log('Размер отправки:', sizeMB, 'МБ, фото:', items.filter(function(it){return it.photos && it.photos.length;}).length);
+
     fetch(endpoint, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
+      body: body
     }).then(function(){
       showDone(payload, false);
     }).catch(function(err){
+      // на iOS Safari часто бывает «Load failed» при большом объёме — повторяем
+      if (retryCount < 2) {
+        setTimeout(function(){ submitAudit(retryCount + 1); }, 2500);
+        return;
+      }
       btn.disabled = false;
       btn.textContent = 'Сохранить аудит';
-      alert('Не удалось отправить: ' + err.message);
+      var photoCount = items.reduce(function(s, it){ return s + (it.photos ? it.photos.length : 0); }, 0);
+      var msg = 'Не удалось отправить: ' + (err && err.message ? err.message : 'ошибка сети') + '\n\n' +
+        'Размер отправки: ' + sizeMB + ' МБ' + (photoCount ? ' (фото: ' + photoCount + ')' : '') + '\n\n' +
+        'Возможные причины:\n' +
+        '— слабый интернет (попробуйте Wi-Fi)\n' +
+        (photoCount > 5 ? '— много фото — попробуйте уменьшить количество\n' : '') +
+        '\nДанные не потеряны. Нажмите «Сохранить аудит» ещё раз, когда связь будет стабильнее.';
+      alert(msg);
     });
   }
 
